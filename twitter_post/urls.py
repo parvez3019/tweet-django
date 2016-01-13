@@ -18,7 +18,7 @@ from django.contrib import admin
 urlpatterns = [
 	# url(r'^$', 'tweet.views.home', name='home'),
 	url(r'^$','tweet.views.twitterAuthenticate',name = 'twitterAuthenticate')
-	# url(r'^t/','tweet.views.twitterAuthorizeCallback',name ='twitterAuthorizeCallback')
+    # url(r'^callback/','tweet.views.twitterAuthorizeCallback',name ='twitterAuthorizeCallback')
  
     #url(r'^admin/', include(admin.site.urls)),
 ]
