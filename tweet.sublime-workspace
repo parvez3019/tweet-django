@@ -1,0 +1,545 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"b",
+				"button	Tag"
+			],
+			[
+				"h",
+				"h1	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "from django.contrib import admin\n\n# Register your models here.\n",
+			"file": "tweet/admin.py",
+			"file_size": 63,
+			"file_write_time": 130971473556679109,
+			"settings":
+			{
+				"buffer_size": 63,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tweet/templates/base.html",
+			"settings":
+			{
+				"buffer_size": 1048,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "twitter_post/settings.py",
+			"settings":
+			{
+				"buffer_size": 2908,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "from .forms import StatusForm\nfrom django.shortcuts import render_to_response\nfrom django.template.context import RequestContext\nfrom django.shortcuts import render\nimport tweepy\nimport requests.packages.urllib3\nrequests.packages.urllib3.disable_warnings()\n\n\n\n\ndef twitterAuthenticate(request):\n	consumer_key = 'u2q9wRYm39FNfO5pRAW5TRC5I'\n	consumer_secret = '3laxjeOWk95UjI3bkjR6PIWLJZI6J1KyetIV2z0BvUDJ8xfqq3'\n	access_token = ''\n	access_token_secret= ''\n	session = {}\n	callback_url = '/'\n    auth = tweepy.OAuthHandler('consumer_token', 'consumer_secret', 'callback_url')\n\n    try:\n        redirect_url = auth.get_authorization_url()\n    except tweepy.TweepError:\n        return HttpResponse('error', status=500)\n\n    request.session['request_token'] = (auth.request_token.key, auth.request_token.secret)\n\n    return HttpResponseRedirect(redirect_url)\n\ndef twitterAuthorizeCallback(request):\n    verifier = request.GET.get('oauth_verifier')\n\n    auth = tweepy.OAuthHandler('consumer_token', 'consumer_secret')\n\n    token = request.session.get('request_token')\n    request.session.delete('request_token')\n    auth.set_request_token(token[0], token[1])\n\n    try:\n        token = auth.get_access_token(verifier)\n    except tweepy.TweepError:\n        return HttpResponse('error', status=500)\n\n    response_data = {}\n    response_data['key'] = auth.access_token.key\n    response_data['secret'] = auth.access_token.secret\n\n    response = 'you are now authenticated'\n\n    return HttpResponse(response)\n\n\n\n\n\n# def home(request):\n# 	form=StatusForm(request.POST or None)\n# 	if request.method==\"POST\":\n				\n# 		print \"scirpt\"\n\n# 		consumer_key = 'u2q9wRYm39FNfO5pRAW5TRC5I'\n# 		consumer_secret = '3laxjeOWk95UjI3bkjR6PIWLJZI6J1KyetIV2z0BvUDJ8xfqq3'\n# 		access_token = ''\n# 		access_token_secret= ''\n# 		session = {}\n# 		auth = tweepy.OAuthHandler(consumer_key, consumer_secret)\n\n# 		try:\n# 			redirect_url = auth.get_authorization_url()\n# 		except tweepy.TweepError:\n# 		    return HttpResponse('error', status=500)\n\n# 		request.session['request_token'] = (auth.request_token.key, auth.request_token.secret)\n\n\n# 		# request_token = session['request_token']\n# 		# del session['request_token']\n\n# 		# auth = tweepy.OAuthHandler(consumer_key, consumer_secret)\n# 		# auth.request_token = request_token\n# 		# verifier = request.GET.get('oauth_verifier')\n# 		# auth.get_access_token(verifier)\n# 		# session['token'] = (auth.access_token, auth.access_token_secret)\n\n\n\n# 		# # auth.set_access_token(access_token, access_token_secret)\n# 		# token, token_secret = session['token']\n# 		# auth = tweepy.OAuthHandler(consumer_key, consumer_secret)\n# 		# auth.set_access_token(token, token_secret)\n# 		# # api = tweepy.API(auth)\n\n\n\n# 		verifier = request.GET.get('oauth_verifier')\n# 		auth = tweepy.OAuthHandler('consumer_token', 'consumer_secret')\n# 		token = request.session.get('request_token')\n# 		request.session.delete('request_token')\n# 		auth.set_request_token(token[0], token[1])\n\n# 		try:\n# 		    token = auth.get_access_token(verifier)\n# 		except tweepy.TweepError:\n# 			return HttpResponse('error', status=500)\n\n# 		response_data = {}\n# 		response_data['key'] = auth.access_token.key\n# 		response_data['secret'] = auth.access_token.secret  \n#         response = 'you are now authenticated'\n#         api = tweepy.API(auth)\n#         api.update_status('tweepy + oauth!')\n#         print 'done'\n#         return render(request,\"home.html\")\n    \n#     ",
+			"file": "tweet/views.py",
+			"file_size": 3406,
+			"file_write_time": 130971798914102034,
+			"settings":
+			{
+				"buffer_size": 3438,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "twitter_post/urls.py",
+			"settings":
+			{
+				"buffer_size": 919,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tweet/tests.py",
+			"settings":
+			{
+				"buffer_size": 60,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tweet/tweetscript.py",
+			"settings":
+			{
+				"buffer_size": 1078,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tweet/models.py",
+			"settings":
+			{
+				"buffer_size": 814,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tweet/forms.py",
+			"settings":
+			{
+				"buffer_size": 211,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 537.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/tweet",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/twitter_post",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/thirdauth"
+	],
+	"file_history":
+	[
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/manage.py",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/twitter_post/urls.py",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/tweet/templates/home.html",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/tweet/tweet.py",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/manage.py",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/tweet/forms.py",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/tweet/models.py",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/tweet/views.py",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/templates/home.html",
+		"/media/parvez/Local Drive/WorkSpace/web/twitter_post/twitter_post/settings.py",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/thirdauth/views.py",
+		"/media/parvez/Local Drive/WorkSpace/web/E-commerce/eshop/catalogue/models.py",
+		"/media/parvez/Local Drive/WorkSpace/web/E-commerce/django-oscar/src/oscar/apps/catalogue/models.py",
+		"/media/parvez/Local Drive/WorkSpace/web/E-commerce/eshop/eshop/settings.py",
+		"/media/parvez/Local Drive/WorkSpace/web/E-commerce/eshop/manage.py",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/templates/base.html",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/thirdauth/settings.py",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/thirdauth/models.py",
+		"/media/parvez/Local Drive/WorkSpace/web/ThirdAuth/thirdauth/urls.py",
+		"/media/parvez/Local Drive/WorkSpace/web/Buffer/mysite/manage.py",
+		"/media/parvez/Local Drive/WorkSpace/web/Buffer/mysite/sublime-project",
+		"/home/parvez/Work/jquery/Index.html",
+		"/home/parvez/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/parvez/Desktop/bluetooth-startup",
+		"/home/parvez/Downloads/web/index.html"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Internationalization",
+			"');\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "tweet/admin.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 63,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "tweet/templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1048,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								639,
+								639
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "twitter_post/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2908,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2066,
+								2066
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 612.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "tweet/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								882,
+								882
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 561.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "twitter_post/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 919,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								639,
+								639
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "tweet/tests.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 60,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "tweet/tweetscript.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1078,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1017,
+								1017
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 153.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "tweet/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 814,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								681,
+								681
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "tweet/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 211,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "tweet.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 232.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
